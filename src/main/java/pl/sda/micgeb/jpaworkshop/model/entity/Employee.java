@@ -12,6 +12,7 @@ import java.time.LocalDate;
 @Entity
 @NoArgsConstructor
 @ToString
+@Getter
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
