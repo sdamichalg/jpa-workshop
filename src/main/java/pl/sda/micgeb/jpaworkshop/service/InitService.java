@@ -5,12 +5,15 @@ import org.springframework.stereotype.Service;
 import pl.sda.micgeb.jpaworkshop.model.Address;
 import pl.sda.micgeb.jpaworkshop.model.entity.Department;
 import pl.sda.micgeb.jpaworkshop.model.entity.Employee;
+import pl.sda.micgeb.jpaworkshop.model.entity.EntryCard;
 import pl.sda.micgeb.jpaworkshop.repository.DepartmentRepository;
 import pl.sda.micgeb.jpaworkshop.repository.EmployeeRepository;
+import pl.sda.micgeb.jpaworkshop.repository.EntryCardRepository;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -18,6 +21,7 @@ public class InitService {
 
     private final EmployeeRepository employeeRepository;
     private final DepartmentRepository departmentRepository;
+    private final EntryCardRepository entryCardRepository;
 
     public void createSimpleData() {
 
@@ -46,12 +50,18 @@ public class InitService {
         department5.setAddress(new Address("Poland", "Poznan", "Stary Rynek", "61-772"));
         departmentRepository.save(department5);
 
-        Employee employee = new Employee();
-        employee.setFirstName("Tom");
-        employee.setLastName("Smith");
-        employee.setSalary(new BigDecimal("5000"));
-        employee.setContractEnd(LocalDate.of(2025, Month.DECEMBER, 31));
+        EntryCard entryCard1 = new EntryCard();
+        entryCard1.setUuid(UUID.randomUUID());
+        entryCardRepository.save(entryCard1);
 
-        employeeRepository.save(employee);
+        Employee employee1 = new Employee();
+        employee1.setFirstName("Tom");
+        employee1.setLastName("Smith");
+        employee1.setSalary(new BigDecimal("5000"));
+        employee1.setContractEnd(LocalDate.of(2025, Month.DECEMBER, 31));
+        employee1.setDepartment(department1);
+        employee1.setEntryCard(entryCard1);
+
+        employeeRepository.save(employee1);
     }
 }

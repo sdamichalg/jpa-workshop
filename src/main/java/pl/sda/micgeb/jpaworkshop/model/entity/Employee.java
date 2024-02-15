@@ -1,21 +1,24 @@
 package pl.sda.micgeb.jpaworkshop.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
 @NoArgsConstructor
-@ToString
 @Getter
+@Setter
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Setter(AccessLevel.NONE)
     private Long id;
 
     private String firstName;
@@ -23,19 +26,10 @@ public class Employee {
     private BigDecimal salary;
     private LocalDate contractEnd;
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public void setSalary(BigDecimal salary) {
-        this.salary = salary;
-    }
-
-    public void setContractEnd(LocalDate contractEnd) {
-        this.contractEnd = contractEnd;
-    }
+    @ManyToOne
+    @JoinColumn(name = "dep_id")
+    @JsonBackReference
+    private Department department;
+    @OneToOne
+    private EntryCard entryCard;
 }
