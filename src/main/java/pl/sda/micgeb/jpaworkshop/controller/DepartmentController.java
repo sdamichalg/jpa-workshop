@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import pl.sda.micgeb.jpaworkshop.model.dto.DepartmentDto;
 import pl.sda.micgeb.jpaworkshop.model.entity.Department;
 import pl.sda.micgeb.jpaworkshop.service.DepartmentService;
 
@@ -29,5 +30,12 @@ public class DepartmentController {
     public ResponseEntity<List<Department>> findByCity(@RequestParam String city) {
         List<Department> departmentsByCity = departmentService.findDepartmentsByCity(city);
         return ResponseEntity.ok(departmentsByCity);
+    }
+
+    @GetMapping("/findAllByName")
+    public ResponseEntity<List<DepartmentDto>> findAllByName(@RequestParam String departmentName) {
+        List<DepartmentDto> dtos = departmentService.findAllByName(departmentName);
+        return ResponseEntity.ok(dtos);
+
     }
 }
