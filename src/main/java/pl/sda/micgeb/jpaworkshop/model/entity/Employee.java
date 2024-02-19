@@ -32,4 +32,9 @@ public class Employee {
     private Department department;
     @OneToOne
     private EntryCard entryCard;
+
+    @ManyToOne
+    @JoinColumn(name = "supervisor_id")
+    @JsonBackReference
+    private Supervisor supervisor;
 }
