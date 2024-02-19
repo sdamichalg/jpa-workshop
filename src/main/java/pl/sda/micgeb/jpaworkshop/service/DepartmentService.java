@@ -2,10 +2,12 @@ package pl.sda.micgeb.jpaworkshop.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.sda.micgeb.jpaworkshop.model.dto.DepartmentDto;
 import pl.sda.micgeb.jpaworkshop.model.entity.Department;
 import pl.sda.micgeb.jpaworkshop.repository.DepartmentRepository;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -31,6 +33,16 @@ public class DepartmentService {
         return allByName.stream()
                 .map(ent -> departmentMapper.toDto(ent))
                 .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void addNewDepartment(DepartmentDto dto)  {
+        departmentRepository.save(departmentMapper.toEntity(dto));
+//        throwSomeException();
+    }
+
+    private void throwSomeException() throws SQLException {
+        throw new SQLException("nasz wyjatek");
     }
 
     public List<Department> findDepartmentsByCity(String city) {

@@ -3,6 +3,7 @@ package pl.sda.micgeb.jpaworkshop.service;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.mapping.List;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.sda.micgeb.jpaworkshop.model.Address;
 import pl.sda.micgeb.jpaworkshop.model.EmployeeType;
 import pl.sda.micgeb.jpaworkshop.model.entity.*;
@@ -25,6 +26,7 @@ public class InitService {
     private final FloorRepository floorRepository;
     private final SupervisorRepository supervisorRepository;
 
+    @Transactional
     public void createSimpleData() {
 
         Department department1 = new Department();

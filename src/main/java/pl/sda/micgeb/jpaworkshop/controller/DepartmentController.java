@@ -2,14 +2,12 @@ package pl.sda.micgeb.jpaworkshop.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.sda.micgeb.jpaworkshop.model.dto.DepartmentDto;
 import pl.sda.micgeb.jpaworkshop.model.entity.Department;
 import pl.sda.micgeb.jpaworkshop.service.DepartmentService;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @RestController
@@ -26,6 +24,12 @@ public class DepartmentController {
 
     }
 
+    @PostMapping("/add")
+    public ResponseEntity<Void> addNew(@RequestBody DepartmentDto requestDto) {
+        departmentService.addNewDepartment(requestDto);
+        return ResponseEntity.ok().build();
+    }
+
     @GetMapping("/findByCity")
     public ResponseEntity<List<Department>> findByCity(@RequestParam String city) {
         List<Department> departmentsByCity = departmentService.findDepartmentsByCity(city);
@@ -36,6 +40,6 @@ public class DepartmentController {
     public ResponseEntity<List<DepartmentDto>> findAllByName(@RequestParam String departmentName) {
         List<DepartmentDto> dtos = departmentService.findAllByName(departmentName);
         return ResponseEntity.ok(dtos);
-
     }
+
 }
