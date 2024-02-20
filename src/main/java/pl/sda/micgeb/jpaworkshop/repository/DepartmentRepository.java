@@ -1,6 +1,7 @@
 package pl.sda.micgeb.jpaworkshop.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import pl.sda.micgeb.jpaworkshop.model.entity.Department;
@@ -16,4 +17,8 @@ public interface DepartmentRepository extends JpaRepository<Department, Long> {
 
     @Query(value = "SELECT d from Department d where d.name = :name")
     List<Department> findAllByName(@Param("name") String name);
+
+    void deleteByName (String name);
+
+
 }

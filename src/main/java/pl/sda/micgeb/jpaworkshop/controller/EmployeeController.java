@@ -2,12 +2,14 @@ package pl.sda.micgeb.jpaworkshop.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import pl.sda.micgeb.jpaworkshop.model.dto.EmployeeDto;
 import pl.sda.micgeb.jpaworkshop.model.dto.NewEmployeeReq;
+import pl.sda.micgeb.jpaworkshop.model.entity.Employee;
 import pl.sda.micgeb.jpaworkshop.service.EmployeeService;
+
+import java.math.BigDecimal;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,5 +23,19 @@ public class EmployeeController {
         employeeService.saveEmployee(newEmployee);
 
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/updateSalary")
+    public ResponseEntity<Void> updateSalary(@RequestParam String lastName, @RequestParam String newSalary) {
+        employeeService.updateSalary(lastName, newSalary);
+
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/salary")
+    public ResponseEntity<List<EmployeeDto>> getEmployeesBySalary(@RequestParam BigDecimal min, @RequestParam BigDecimal max) {
+        List<EmployeeDto> salaryBetween = employeeService.findSalaryBetween(min, max);
+
+        return ResponseEntity.ok(salaryBetween);
     }
 }

@@ -42,4 +42,10 @@ public class DepartmentController {
         return ResponseEntity.ok(dtos);
     }
 
+    @DeleteMapping("/deleteByName")
+    public ResponseEntity<Void> deleteByName(@RequestParam String departmentName) {
+        departmentService.deleteDepartmentByName(departmentName);
+        return ResponseEntity.ok().build();
+    }
+
 }

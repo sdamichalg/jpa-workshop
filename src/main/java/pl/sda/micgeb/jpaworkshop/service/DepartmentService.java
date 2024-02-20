@@ -22,7 +22,11 @@ public class DepartmentService {
         Optional<Department> optDepartment = departmentRepository.findByName(name);
 
         if (optDepartment.isPresent()) {
-            return optDepartment.get();
+            Department department = optDepartment.get();
+            System.out.println("*******************************");
+            department.getEmployees();
+            return department;
+
         }
         return null;
     }
@@ -47,5 +51,10 @@ public class DepartmentService {
 
     public List<Department> findDepartmentsByCity(String city) {
         return departmentRepository.findAllByAddress_City(city);
+    }
+
+    @Transactional
+    public void deleteDepartmentByName(String departmentName) {
+        departmentRepository.deleteByName(departmentName);
     }
 }

@@ -21,7 +21,7 @@ public class Department {
     @Embedded
     private Address address;
 
-    @OneToMany(mappedBy = "department")
+    @OneToMany(mappedBy = "department", cascade = CascadeType.REMOVE)
     @JsonManagedReference
     private List<Employee> employees;
 }
