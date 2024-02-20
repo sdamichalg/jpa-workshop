@@ -247,10 +247,16 @@ public class InitService {
         author2.setBooks(List.of(book3, book4));
         authorRepository.save(author2);
 
+        Author author3 = new Author();
+        author3.setName("J.K. Rowling");
 
+        Book book5 = new Book();
+        book5.setTitle("Harry Potter i Kamień Filozoficzny");
 
+        Book book6 = new Book();
+        book6.setTitle("Harry Potter i KOmnata Tajemnic");
 
-
-
+        author3.setBooks(List.of(book5, book6));
+        authorRepository.save(author3);
     }
 }
