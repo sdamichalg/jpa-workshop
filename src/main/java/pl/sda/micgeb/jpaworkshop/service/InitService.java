@@ -1,7 +1,6 @@
 package pl.sda.micgeb.jpaworkshop.service;
 
 import lombok.RequiredArgsConstructor;
-import org.hibernate.mapping.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.sda.micgeb.jpaworkshop.model.Address;
@@ -13,6 +12,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -25,6 +25,7 @@ public class InitService {
     private final EntryCardRepository entryCardRepository;
     private final FloorRepository floorRepository;
     private final SupervisorRepository supervisorRepository;
+    private final AuthorRepository authorRepository;
 
     @Transactional
     public void createSimpleData() {
@@ -222,5 +223,34 @@ public class InitService {
         employee8.setContractEnd(LocalDate.of(2023, 6, 30));
         employee8.setEntryCard(entryCard8);
         employeeRepository.save(employee8);
+
+        Author author1 = new Author();
+        author1.setName("Mickiewicz");
+
+        Book book1 = new Book();
+        book1.setTitle("Pan Taduesz");
+
+        Book book2 = new Book();
+        book2.setTitle("Dziady");
+
+        author1.setBooks(List.of(book1, book2));
+        authorRepository.save(author1);
+
+        Author author2 = new Author();
+        author2.setName("Sienkiewicz");
+
+        Book book3 = new Book();
+        book3.setTitle("Potop");
+
+        Book book4 = new Book();
+        book4.setTitle("Ogniem i mieczem");
+        author2.setBooks(List.of(book3, book4));
+        authorRepository.save(author2);
+
+
+
+
+
+
     }
 }

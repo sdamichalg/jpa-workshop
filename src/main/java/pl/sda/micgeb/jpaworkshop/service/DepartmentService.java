@@ -24,7 +24,7 @@ public class DepartmentService {
         if (optDepartment.isPresent()) {
             Department department = optDepartment.get();
             System.out.println("*******************************");
-            department.getEmployees();
+            System.out.println(department.getEmployees());
             return department;
 
         }
