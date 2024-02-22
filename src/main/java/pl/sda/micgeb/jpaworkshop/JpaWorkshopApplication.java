@@ -11,7 +11,7 @@ import pl.sda.micgeb.jpaworkshop.service.InitService;
 @RequiredArgsConstructor
 public class JpaWorkshopApplication implements CommandLineRunner {
 
-    private final InitService initService;
+//    private final InitService initService;
 
     public static void main(String[] args) {
         SpringApplication.run(JpaWorkshopApplication.class, args);
@@ -19,6 +19,6 @@ public class JpaWorkshopApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        initService.createSimpleData();
+//        initService.createSimpleData();
     }
 }
